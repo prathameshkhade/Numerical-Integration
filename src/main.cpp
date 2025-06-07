@@ -10,6 +10,8 @@
 #include <memory>
 #include <vector>
 #include <iomanip>
+#include <algorithm>
+#include <fstream>
 
 using namespace numerical;
 

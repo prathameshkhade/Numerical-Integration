@@ -28,7 +28,7 @@ add_executable(NumericalIntegration ${SOURCES})
 
 # Add compiler warnings
 if(MSVC)
-    target_compile_options(NumericalIntegration PRIVATE /W4)
+    target_compile_options(NumericalIntegration PRIVATE /W4 /D_CRT_SECURE_NO_WARNINGS)
 else()
     target_compile_options(NumericalIntegration PRIVATE -Wall -Wextra -Wpedantic)
 endif()

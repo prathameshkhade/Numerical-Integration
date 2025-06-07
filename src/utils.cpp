@@ -95,7 +95,17 @@ std::string getTimestamp() {
     auto now_time_t = std::chrono::system_clock::to_time_t(now);
     
     std::stringstream ss;
+    
+#ifdef _WIN32
+    // Use a safer method in Windows
+    struct tm timeinfo;
+    localtime_s(&timeinfo, &now_time_t);
+    ss << std::put_time(&timeinfo, "%Y-%m-%d %H:%M:%S");
+#else
+    // Use the standard method in Unix systems
     ss << std::put_time(std::localtime(&now_time_t), "%Y-%m-%d %H:%M:%S");
+#endif
+    
     return ss.str();
 }
 

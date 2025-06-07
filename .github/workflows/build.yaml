@@ -15,7 +15,8 @@ jobs:
   build-windows:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
     
     - name: Configure CMake
       run: |
@@ -31,8 +32,8 @@ jobs:
     - name: Create Package
       run: |
         cd build
-        cpack -G NSIS
-        cpack -G ZIP
+        cpack -G NSIS -C Release
+        cpack -G ZIP -C Release
     
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
@@ -53,7 +54,8 @@ jobs:
   build-macos:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
     
     - name: Configure CMake
       run: |
@@ -91,7 +93,8 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
     
     - name: Install Dependencies
       run: |
