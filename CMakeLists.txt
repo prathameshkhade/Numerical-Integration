@@ -26,7 +26,7 @@ include_directories(include)
 # Create executable
 add_executable(NumericalIntegration ${SOURCES})
 
-# Add compiler warnings
+# Add compiler warnings and disable MSVC CRT warnings
 if(MSVC)
     target_compile_options(NumericalIntegration PRIVATE /W4 /D_CRT_SECURE_NO_WARNINGS)
 else()
@@ -46,6 +46,8 @@ set(CPACK_PACKAGE_VENDOR "Prathamesh Khade")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Numerical Integration Calculator")
 set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "NumericalIntegration")
+set(CPACK_PACKAGE_CONTACT "Prathamesh Khade <prathameahkhade@gmail.com>")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Prathamesh Khade")
 
 if(WIN32)
     set(CPACK_GENERATOR "NSIS;ZIP")
