@@ -9,7 +9,7 @@ on:
     branches: [ main ]
 
 permissions:
-  contents: write
+  contents: write  # Required for uploading release assets
 
 jobs:
   build-windows:
@@ -115,8 +115,16 @@ jobs:
     - name: Create Package
       run: |
         cd build
-        cpack -G DEB
+        # First try TGZ as it's more reliable
         cpack -G TGZ
+        
+        # Try to create DEB package but don't fail if it errors
+        cpack -G DEB || echo "DEB package creation failed, but continuing with TGZ"
+        
+        # Manual fallback - create a simple tarball with the executable if needed
+        if [ ! -f *.deb ] && [ ! -f *.tar.gz ]; then
+          tar -czvf NumericalIntegration-linux.tar.gz bin/NumericalIntegration
+        fi
     
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
